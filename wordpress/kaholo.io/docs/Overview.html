@@ -1,5 +1,5 @@
 <h1>What is Kaholo?</h1>
-<p>Kaholo is a general-purpose drag-and-drop user-friendly low-code automation platform, most commonly used for Development Operations, aka <a href="https://en.wikipedia.org/wiki/DevOps">DevOps</a>, automated testing and cloud infrastructure management. Kaholo is intuitive enough that even casual users can easily create, execute, monitor, diagnose and maintain automation with little or no training.</p>
+<p>Kaholo is a general-purpose drag-and-drop user-friendly low-code automation platform, most commonly used for Development Operations, aka <a href="https://en.wikipedia.org/wiki/DevOps" style="color:#000088">DevOps</a>, automated testing and cloud infrastructure management. Kaholo is intuitive enough that even casual users can easily create, execute, monitor, diagnose and maintain automation with little or no training.</p>
 
 Kaholo also has many advance features for expert users, including:
 <ul>
@@ -15,29 +15,40 @@ Kaholo also has many advance features for expert users, including:
 <h2>Actions, Pipelines and Projects</h2>
 <p>Automated processes consist of one or more basic steps (<b>Actions</b>) linked together in a flow (<b>Pipeline</b>). Pipelines are created and Actions are added and configured in Kaholo's Design View.</p>
 
-<p><img class="alignnone wp-image-7451" src="https://kaholo.io/wp-content/uploads/2023/10/PipelineAndAction001.png" alt="" width="800" /></p>
+<p><img class="alignnone wp-image-7451" src="https://kaholo.io/wp-content/uploads/2023/10/PipelineAndAction001.png" alt="" width="1364" /></p>
 
-<p>Pipelines are grouped into <b>Projects</b>. Apart from logical grouping, Projects associate pipelines with a specific version control repository for GitOps, user group access rights may also be managed on a project-by-project basis.</p>
+<p>Each Action corresponds to a Kaholo Plugin that extends Kaholo's capability to work with a specific technology or 3rd-party system, for example Maven - a build automation tool used primarily for Java projects. There are 100's of plugins available.</p>
+
+<p>Actions are configured by selecting the Action in the design view and specifying the configuration in the panel on the right. Often configuration items can be left empty to accept resonable default values.</p>
+
+<p>Actions can be highly parameterized, so even those not very familiar with an Action (or DevOps in general) can configure Actions successfully. This also makes it simple to modify a pipeline to suit another purpose or update pipelines as requirements change - no code or scripting required!</p>
+
+<p><img class="alignnone wp-image-7458" src="https://kaholo.io/wp-content/uploads/2023/10/ActionConfigure620a.png" alt="" width="967" /></p>
+
+<p>Pipelines are grouped into <b>Projects</b>. Apart from logical grouping, Projects associate pipelines with a specific version control repository for GitOps. User group access rights may also be managed on a project-by-project basis.</p>
 
 <p>In the Pipelines View of Kaholo, Pipelines are organized by Project as seen below.</p>
 
-<p><img class="alignnone wp-image-7452" src="https://kaholo.io/wp-content/uploads/2023/10/ProjectAndPipeline001-1024x452.png" alt="" width="800" /></p>
+<p><img class="alignnone wp-image-7452" src="https://kaholo.io/wp-content/uploads/2023/10/ProjectAndPipeline001-1024x452.png" alt="" width="1600" /></p>
 
 <h2>Executions</h2>
 <p>An <b>Execution</b> is a single run of a Pipeline. Executions can be triggered in one or more ways:</p>
 <p><ul>
     <li>Manual Execution - a user clicking on the Execute button</li>
     <li>Calendar/Clock Schedule</li>
-    <li>Triggered by another event
-        <ul>
+    <li>Triggered by another event</li>
+    <ul>
         <li>Another Kaholo Pipeline</li>
         <li>An external 3rd party process (Webhook)</li>
         <li>GitOps - a change made in the code repository</li>
-    </ul></li>
+    </ul>
 </ul></p>
 
 <p>Executions of a pipeline can be seen in the Pipeline Executions View, as shown below. On the left is a list of all executions, past and present. Selecting an Execution causes the rest of the display to show details pertinent to that execution.</p>
 <p>In the center is the list of Actions taken by the Pipeline. Selecting an Action causes the right side of the display to show information pertinent to that Action.</p>
 <p>On the right is the Activity Log and Final Result for the selected Action. The Activity Log contains the configuration of the action as well as informational messages and errors reported during the Action. The Final Result is the outcome of the Action, often presented in JSON format to simplify code-layer access for Actions downstream in the pipeline.</p>
 
-<p><img class="alignnone wp-image-7456" src="https://kaholo.io/wp-content/uploads/2023/10/ExecutionsViewPipelineExec-3.png" alt="" width="800" /></p>
+<p><img class="alignnone wp-image-7456" src="https://kaholo.io/wp-content/uploads/2023/10/ExecutionsViewPipelineExec-3.png" alt="" width="1600" /></p>
+
+<h1>Summary</h1>
+We hope you are intrigued with this brief introduction to the basic features of Kaholo... there is so much more to see! Please read on, and feel free to <a href="https://en.wikipedia.org/wiki/DevOps" style="color:#000088">contact us</a> for a demonstration or to discuss how Kaholo can meet your needs!
