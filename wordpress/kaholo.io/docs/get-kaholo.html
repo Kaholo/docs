@@ -1,0 +1,77 @@
+<h1>Get Kaholo</h1>
+<p>Kaholo has several deployment models to choose from:
+<p>
+<ul>
+    <li>Kaholo SaaS - Kaholo-hosted software-as-a-service</li>
+    <li>Trial deployment in virtual machine (VM)</li>
+    <li>On-site deployment in Kuberentes</li>
+    <li>Hybrid SaaS + on-site deployment</li>
+</ul>
+<h2>Kaholo SaaS</h2>
+<p>By far the easiest way to get Kaholo is Kaholo-hosted Software-as-a-Service (SaaS). Leave the deployment to us!</p>
+<h3>Benefits</h3>
+<p>Kaholo SaaS benefits include:</p>
+<ul>
+    <li>Get started immediately with a free trial account</li>
+    <li>No compute resources required - all is provided by Kaholo in the cloud</li>
+    <li>No Kubernetes expertise required</li>
+    <li>Simple monthly subscription fee</li>
+    <li>Scales effortlessly and automatically as usage grows</li>
+    <li>Automated upgrade and backup managed by Kaholo</li>
+    <li>Monitored for faults 24x7 by Kaholo's network operation center</li>
+    <li>Comes with highest level of service and support</li>
+</ul>
+<p>Visit our <a href="https://kaholo.io/sign-up/" style="color:#000088">Sign Up Page</a> and start automating in minutes with a free 30-day trial of Kaholo SaaS.</p>
+<h2>Trial deployment in VM</h2>
+<p>Set up your own virtual machine and deploy Kaholo on your own terms. This model works in any VM - either onsite or in the cloud. It is most useful for product evaluations, test/training systems, and development workstations. The deployment is automated using Ansible.</p>
+<h3>Prerequisites</h3>
+<p>To deploy a trial system in a VM you will need:</p>
+<ul>
+    <li>A Virtual Machine with</li>
+    <ul>
+        <li>Minimum of 2vCPU and 4GB RAM</li>
+        <li>Recommended 4vCPU and 8GB RAM for better performance</li>
+        <li>50 GB available disk space</li>
+        <li>Ubuntu 22 LTS operating system</li>
+        <li>Network access from the VM to devices and systems you wish to automate with Kaholo</li>
+    </ul>
+    <li>A client machine that can run command <code>ansible playbook</code></li>
+    <li>SSH key with access to VM as user "ubuntu" with sudo privileges</li>
+    <li>FQDN that publicly resolves in DNS to the VM's public IP address, e.g. kaholotrial.myplace.org</li>
+    <li>From Kaholo</li>
+    <ul>
+        <li>A Docker Hub personal access token (dckr_pat) to pull the kaholo images during deployment, and</li>
+        <li>A license file to use Kaholo after deployment</li>
+    </ul>
+    <li>The <a href="https://github.com/Kaholo/kaholo-ansible" style="color:#000088">kaholo-ansible</a> Ansible playbook found in GitHub</li>
+</ul>
+<p>To get your Docker Hub personal access token and Kaholo trial license, please<a href="https://kaholo.io/contact/" style="color:#000088">contact us!</a></p>
+<p>Download or Git clone the playbook and view README.md for detailed instructions how to deploy Kaholo in the VM.</p>
+<h3>Benefits</h3>
+<p>Trial deployment in VM benefits include:</p>
+<ul>
+    <li>Convenient and efficient deployment for short-term Kaholo deployment</li>
+    <ul>
+        <li>Trial/Evaluation</li>
+        <li>Test/Dev</li>
+        <li>Training</li>
+    </ul>
+    <li>Good for light-weight workloads</li>
+    <li>No Kuberentes resources or skills required - Ansible does it for you</li>
+    <li>VM can be easily shut down and restarted as needed</li>
+</ul>
+<h2>On-site Deployment with Kubernetes</h2>
+<p>On-site deployment in Kubernetes is for production use where SaaS is for whatever reason not feasible, for example due to onerous regulatory requirements or corporate policy. The main difference from SaaS is that On-site is self-managed by your Kubernetes administrator, the compute resources used are an additional operational cost, and service and support may also incur additional cost over SaaS.</p>
+<p>Specific requirements vary widely on a case-by-case basis so an on-site deployment plan requires cooperation between your Kubernetes administrator and Kaholo. Please <a href="https://kaholo.io/contact/" style="color:#000088">contact us</a> to arrange for a free consultation.</p>
+<p>The general concept is the same as for any Kaholo deployment - a helm chart is used to deploy Kaholo on a Kubernetes cluster. However the deployment may require adjustment depending on which hardware and/or vendor's cloud infrastructure is used, and depending on agent requirements.</p>
+
+<p>On-site Deployment with Kubernetes benefits include:</p>
+<ul>
+    <li>Provides highly scalable production-quality level of service, as good as SaaS</li>
+    <li>On-site is the only production-class option if SaaS is for whatever reason eliminated</li>
+    <li>Useful in ring-fenced high-security environments where access from outside is categorically denied</li>
+    <li>Co-locating Kaholo with users and other integrated systems may provide a performance improvement</li>
+</ul>
+<h2>Hybrid SaaS + On-site Deployment</h2>
+<p>A Hybrid solution is one where SaaS is the primary provider of platform services, but the actual pipeline executions run on agents that are on-site. This can be helpful or even necessary for several reasons, including special software/hardware requirements, corporate security policy, regulatory requirements, geographically distributed workloads, and many other potential reasons.</p>
+<p>If a hybrid deployment seems ideal for your use case please <a href="https://kaholo.io/contact/" style="color:#000088">contact us</a> to arrange for a free consultation.</p>
