@@ -1,0 +1,15 @@
+<!--TITLE: Plugins-->
+<!--FILENAME: plugins.html-->
+<!--PARENT: none-->
+<!--ORDER: 7-->
+
+<p>Kaholo plugins extend the functionality of Kaholo to interact with AWS, Google, and Azure cloud platforms, assorted tools, databases, 3rd party applications, web services, etc. You can find a list of installed plugins in Kaholo Settings | Plugins (puzzle-piece-shaped icon).</p>
+<p><img class="alignnone wp-image-7485" src="https://kaholo.io/wp-content/uploads/2023/11/PluginsInstalled620b.png" alt="" width="1245"/></p>
+<p>Every pipeline action in a Kaholo pipeline is associated with a Kaholo plugin. The action runs one method of the plugin on a Kaholo Agent with the configuration provided by the pipeline, in order to accomplish a task. All Kaholo plugins are open-source, MIT licensed, community-driven development projects. Plugins are customizable and extensible integrations to various tools and 3rd party systems. They provide a pipeline action with the following:</p>
+<ul>
+    <li>One or more methods</li>
+    <li>Definition of the configurable parameters made available to each method, and</li>
+    <li>Code (JavaScript) for the Kaholo agent to carry out the action</li>
+</ul>
+<p>The first two are accomplished by human-readable JSON configuration as seen in the file <code style="font-size: 80%">config.json</code> that is included with each plugin in the <a href="https://github.com/Kaholo" style="color:#000088">Kaholo GitHub Repositories</a>. In fact, many customizations to a plugin can be accomplished by changing nothing but <code style="font-size: 80%">config.json</code>.</p>
+<p>Each plugin provides its own plugin-specific documentation as <code style="font-size: 80%">README.md</code>, in the root folder of its code repository.</p>

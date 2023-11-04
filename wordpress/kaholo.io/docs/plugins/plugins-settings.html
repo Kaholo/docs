@@ -1,0 +1,24 @@
+<!--TITLE: Plugin Settings and Accounts-->
+<!--FILENAME: plugins-settings-->
+<!--PARENT: Plugins-->
+<!--ORDER: 5-->
+
+<p>Plugins have configuration that takes effect at the plugin level, meaning the configuration affects all actions using the plugin. These settings are accessible by clicking on the name of the plugin, which appears as a <span style="color:#000088"><b>blue hyperlink</b></span> in Settings | Plugins. See for example the name of Kubernetes plugin in the above illustration. Plugins without a hyperlink have no settings.</p>
+<p>There are two types of plugin-level settings, Settings and Accounts.</p>
+<h2>Settings</h2>
+<p>Traditional settings are usually defaults for parameters. In the example of Kubernetes, the only setting is "Default Namespace". If this setting is configured, when any user creates a new Kubernetes action in a pipeline, parameter "Namespace" will be automatically populated by the configured default. Once the action is created, the user is at liberty to clear the parameter or replace the value as they please.</p>
+<p>This is meant as a convenience only, so users needn't remember and type in the same namespace every time they create a Kubernetes action. If in practice a wide variety of namespaces are in use, then it is probably preferable to leave this setting unconfigured.</p>
+<p>In rare cases a plugin may have a setting that is not a simple default. These settings are identifiable by the absence of the word "Default" in the parameter name. In some cases such settings are used only if the parameter is undefined at the action level. In other cases the setting is a global constant and the parameter does not even appear at the action level.</p>
+<h2>Accounts</h2>
+<p>Accounts are different from traditional settings in that Accounts are one or more parameters that form a set. These are typically authentication-related parameters but not always.</p>
+<p>For example, to authenticate to a Kubernetes cluster one needs three parameters:</p>
+<ul>
+    <li>Cluster CA Certificate</li>
+    <li>Service Account Token</li>
+    <li>API Server Endpoint</li>
+</ul>
+<p>To authenticate to any other Kubernetes cluster all three parameters would have to change. This is why they are grouped together in a Kaholo Account.</p>
+<p><img class="alignnone wp-image-7474" src="https://kaholo.io/wp-content/uploads/2023/11/PluginsAccountDetail620a.png" alt="" width="1409"/></p>
+<p>Any number of accounts can be made this way at the plugin level, so that at the Action level the user doesn't have to defined all three parameters every time they create a new Kubernetes action. They can instead select an account from the dropdown, as single parameter "Account".</p>
+<p>Users can also create new accounts using the "Add New Plugin Account" item in the drop-down, meaning access to plugin-level configuration is not required to use the Kaholo Accounts feature.</p>
+<p><img class="alignnone wp-image-7475" src="https://kaholo.io/wp-content/uploads/2023/11/PluginsAccountParam620a.png" alt="" width="1409"/></p>

@@ -1,0 +1,19 @@
+<!--TITLE: Installing Plugins-->
+<!--FILENAME: plugins-installing.html-->
+<!--PARENT: Plugins-->
+<!--ORDER: 3-->
+<p>There are two ways to install a plugin, the fully automated "Available Plugins" view and the "Upload Plugin" button, which accepts a zip file of the plugin code. Both are found in Kaholo Settings. Represented in the UI by the puzzle-piece-shaped icon, Plugins is the default page in Settings.</p>
+<h2>Available Plugins</h2>
+<p>In Kaholo Settings | Plugins there are two tabs, Installed Plugins and Available Plugins. Installed Plugins are the plugins that are already installed. Available Plugins is a collection of packages served by a Kaholo repository, ready for one-click installation.</p>
+<p>In the example below, the Helm plugin may be installed and the Google Cloud Kubernetes Engine plugin may be upgraded by clicking on the provided buttons in the right column.</p>
+<p><img class="alignnone wp-image-7471" src="https://kaholo.io/wp-content/uploads/2023/11/PluginsAvailable620a.png" alt="" width="1422" /></p>
+<p>Available Plugins are keyword searchable, so for example if working with a "container" and searching on that term, one will quickly find the Docker, Helm, and Kubernetes plugins.</p>
+<p>Packaging and providing plugins in Available Plugins is a work in progress. The collection grows as each plugin is tested and released since the Available Plugins feature was introduced in mid 2023. If there is a specific plugin you'd like to see in the Available Plugins, or if you cannot find an appropriate plugin for your task at hand, please <a href="https://en.wikipedia.org/wiki/DevOps" style="color:#000088">contact us</a>.</p>
+<h2>Upload a Plugin</h2>
+<p>For plugins not listed in Available plugins, non-standard or otherwise customized plugins, Settings | Plugins has an "Upload Plugin" button. This allows the user to select a zip file for upload and installation as a Kaholo plugin. The Kaholo platform validates the plugin before installing. The requirements include:</p>
+<ul>
+    <li>The zip file must be flat, not with main components in subdirectories.</li>
+    <li>Must contain a file named <code style="font-size: 80%">config.json</code> with a valid Kaholo plugin configuration for the plugin.</li>
+    <li>Must be installable using npm install, including a valid <code style="font-size: 80%">package.json</code></li>
+</ul>
+<p>Note that using the "Download ZIP" feature in GitHub will not work because GitHub zips the files into a subdirectory named after the repository, i.e. not flat. For more details how to package and install a plugin, see the <code style="font-size: 80%">INSTALL.md</code> file included in most plugin repositories.</p>
