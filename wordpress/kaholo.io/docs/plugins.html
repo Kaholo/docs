@@ -1,0 +1,62 @@
+<h2>What is a Kaholo plugin?</h2>
+<p>Every pipeline action in a Kaholo pipeline is associated with a Kaholo plugin. An action runs one method of the plugin on a Kaholo Agent with a configuration provided by the pipeline, in order to accomplish a task. All Kaholo plugins are open-source, MIT licensed, community-driven development projects. Plugins are customizable and extensible integrations to various tools and 3rd party systems. They provide a pipeline action with the following:</p>
+<ul>
+    <li>One or more methods</li>
+    <li>Definition of the configurable parameters made available to each method, and</li>
+    <li>Code (JavaScript) for the Kaholo agent to carry out the action</li>
+</ul>
+<p>The first two are accomplished by human-readable JSON configuration as seen in the file <code style="font-size: 80%">config.json</code> that is included with each plugin in the <a href="https://github.com/Kaholo" style="color:#000088">Kaholo GitHub Repositories</a>. In fact, many customizations to a plugin can be accomplished by changing nothing but <code style="font-size: 80%">config.json</code>.</p>
+<p>Each plugin provides its own plugin-specific documentation as <code style="font-size: 80%">README.md</code>, in the root folder of its code repository.</p>
+<h2>Installing Plugins</h2>
+<p>There are two ways to install a plugin, the fully automated "Available Plugins" view and the "Upload Plugin" button, which accepts a zip file of the plugin code. Both are found in Kaholo Settings. Represented in the UI by the puzzle-piece-shaped icon, Plugins is the default page in Settings.</p>
+<h3>Available Plugins</h3>
+<p>In Kaholo Settings | Plugins there are two tabs, Installed Plugins and Available Plugins. Installed Plugins are the plugins that are already installed. Available Plugins is a collection of packages served by a Kaholo repository, ready for one-click installation.</p>
+<p>In the example below, the Helm plugin may be installed and the Google Cloud Kubernetes Engine plugin may be upgraded by clicking on the provided buttons in the right column.</p>
+<p><img class="alignnone wp-image-7471" src="https://kaholo.io/wp-content/uploads/2023/11/PluginsAvailable620a.png" alt="" width="1422" /></p>
+<p>Available Plugins are keyword searchable, so for example if working with a "container" and searching on that term, one will quickly find the Docker, Helm, and Kubernetes plugins.</p>
+<p>Packaging and providing plugins in Available Plugins is a work in progress. The collection grows as each plugin is tested and released since the Available Plugins feature was introduced in mid 2023. If there is a specific plugin you'd like to see in the Available Plugins, or if you cannot find an appropriate plugin for your task at hand, please <a href="https://en.wikipedia.org/wiki/DevOps" style="color:#000088">contact us</a>.</p>
+<h3>Upload a Plugin</h3>
+<p>For plugins not listed in Available plugins, non-standard or otherwise customized plugins, Settings | Plugins has an "Upload Plugin" button. This allows the user to select a zip file for upload and installation as a Kaholo plugin. The Kaholo platform validates the plugin before installing. The requirements include:</p>
+<ul>
+    <li>The zip file must be flat, not with main components in subdirectories.</li>
+    <li>Must contain a file named <code style="font-size: 80%">config.json</code> with a valid Kaholo plugin configuration for the plugin.</li>
+    <li>Must be installable using npm install, including a valid <code style="font-size: 80%">package.json</code></li>
+</ul>
+<p>Note that using the "Download ZIP" feature in GitHub will not work because GitHub zips the files into a subdirectory named after the repository, i.e. not flat. For more details how to package and install a plugin, see the <code style="font-size: 80%">INSTALL.md</code> file included in most plugin repositories.</p>
+<h2>Plugin Settings</h2>
+<p>Plugins have configuration that takes effect at the plugin level, meaning the configuration affects all actions using the plugin. These settings are accessible by clicking on the name of the plugin, which appears as a <span style="color:#000088"><b>blue hyperlink</b></span> in Settings | Plugins. See for example the name of Kubernetes plugin in the above illustration. Plugins without a hyperlink have no settings.</p>
+<p>There are two types of plugin-level settings, Settings and Accounts.</p>
+<h3>Settings</h3>
+<p>Traditional settings are usually defaults for parameters. In the example of Kubernetes, the only setting is "Default Namespace". If this setting is configured, when any user creates a new Kubernetes action in a pipeline, parameter "Namespace" will be automatically populated by the configured default. Once the action is created, the user is at liberty to clear the parameter or replace the value as they please.</p>
+<p>This is meant as a convenience only, so users needn't remember and type in the same namespace every time they create a Kubernetes action. If in practice a wide variety of namespaces are in use, then it is probably preferable to leave this setting unconfigured.</p>
+<p>In rare cases a plugin may have a setting that is not a simple default. These settings are identifiable by the absence of the word "Default" in the parameter name. In some cases such settings are used only if the parameter is undefined at the action level. In other cases the setting is a global constant and the parameter does not even appear at the action level.</p>
+<h3>Accounts</h3>
+<p>Accounts are different from traditional settings in that Accounts are one or more parameters that form a set. These are typically authentication-related parameters but not always.</p>
+<p>For example, to authenticate to a Kubernetes cluster one needs three parameters:</p>
+<ul>
+    <li>Cluster CA Certificate</li>
+    <li>Service Account Token</li>
+    <li>API Server Endpoint</li>
+</ul>
+<p>To authenticate to any other Kubernetes cluster all three parameters would have to change. This is why they are grouped together in a Kaholo Account.</p>
+<p><img class="alignnone wp-image-7474" src="https://kaholo.io/wp-content/uploads/2023/11/PluginsAccountDetail620a.png" alt="" width="1409"/></p>
+<p>Any number of accounts can be made this way at the plugin level, so that at the Action level the user doesn't have to defined all three parameters every time they create a new Kubernetes action. They can instead select an account from the dropdown, as single parameter "Account".</p>
+<p>Users can also create new accounts using the "Add New Plugin Account" item in the drop-down, meaning access to plugin-level configuration is not required to use the Kaholo Accounts feature.</p>
+<p><img class="alignnone wp-image-7475" src="https://kaholo.io/wp-content/uploads/2023/11/PluginsAccountParam620a.png" alt="" width="1409"/></p>
+
+<h2>Finding Plugins</h2>
+<p>The full collection of known plugins are available in the <a href="https://github.com/Kaholo" style="color:#000088">Kaholo GitHub Repositories</a>. A subset of these - the most requested and commonly used ones - have been tested and released as "Available Plugins" for Kaholo v6.x. There are multiple ways to accomplish a task that are not always clear. For example, there is no "Selenium" plugin because the most common way to Selenium test a project is using a build/test tool like Maven or Pytest, for which there are Kaholo plugins. The Kubernetes, Docker, or Helm plugins may also be used to deploy a Selenium Grid.</p>
+<p>There are also generic plugins that can be multi-purposed, which is very useful. For example, suppose a pipeline needs to access SpaceX launch data. It should be no surprise that there is no Kaholo SpaceX Plugin. However using the generic Kaholo Docker Plugin with method Run Container and this <a href="https://hub.docker.com/r/jakewmeyer/spacex-api" style="color:#000088">spacex-api docker image</a>, that data is made available to a pipeline.</p> <p>The Command Line Plugin is another very useful multi-purpose plugin, especially for those familiar with shell scripting.</p>
+<p>If you are having difficulty finding the plugin you need or have questions about which plugin should be used for a task, please <a href="https://kaholo.io/contact/" style="color:#000088">contact us</a>.</p>
+<h2>Custom Plugins</h2>
+<p>The structure of a Kaholo Plugin is relatively easy to understand and customize. For a very simple plugin to study or use as a starting point for your own custom plugin, see the <a href="https://github.com/Kaholo/kaholo-plugin-template" style="color:#000088">Kaholo Template Plugin</a>.</p>
+<h2>Upgrading and Downgrading Plugins</h2>
+<p>Upgrading and Downgrading a plugin in Kaholo is done by installing a different version of a plugin than the one already installed. Kaholo does not accommodate running multiple versions of the same plugin. Normally an upgrade has no harmful effect but in some cases it could break some or all pipelines using that plugin. It is highly recommended to upgrade in test before risking mission-critical pipelines.</p>
+<p>As a general rule of thumb, the potential for breakage can be determined by the version number. Kaholo uses the <a href="https://semver.org/" style="color:#000088">Semantic Versioning</a> system, where version numbers are X.Y.Z such that X is the major version, Y is the minor version, and Z is the patch version. A major version number change is <b>likely</b> to break pipelines. A minor one is in theory backward compatible but some small breakage could occur in some pipelines. A patch version is unlikely to break anything because it contains only bug fixes.</p>
+<p>When a plugin upgrade has broken a pipeline action, it is most likely that downgrading to the original version will also immediately fix the action. However this is not guaranteed.</p>
+<p>A "trick" way to test a new plugin without affecting the existing one is to rename the plugin in <code style="font-size: 80%">config.json</code> property <code style="font-size: 80%">name</code>. By changing only the name, it effectively becomes a different plugin. Consider changing <code style="font-size: 80%">viewName</code> as well so in Kaholo you can easily see which plugin is the original and which the impostor.</p>
+<h3>Effect of Upgrade on Pipelines</h3>
+<p>When a plugin has been upgraded, pipelines with actions using that plugin will detect the change and raise it as a pipeline issue. The pipeline may still work correctly and in most cases the "issue" may be safely ignored. From the moment the plugin is upgraded all executions of pipelines will use the upgraded version of the plugin.</p>
+<p>By clicking "Fix Action" or "Fix All" and saving the pipeline, the upgrade is acknowledged, pipeline presumed working, and the issues are permanently dismissed. This is a useful feature for tracking which pipelines are using a version of a plugin with which they were tested and confirmed working vs those that may have been affected by an upgrade or downgrade. It also alerts pipeline owners and operators that the upgrade occurred.</p>
+<p><img class="alignnone wp-image-7473" src="https://kaholo.io/wp-content/uploads/2023/11/PluginsUpgrade620a.png" alt="" width="1407"/></p>
+<p>In the case where the new version of the plugin includes breaking changes or additional required parameters, other types of issues may be detected and raised that require attention to the configuration of affected actions.</p>
