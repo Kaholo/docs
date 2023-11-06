@@ -1,4 +1,8 @@
-<h2>Upgrading and Downgrading Plugins</h2>
+<!--TITLE: Upgrading and Downgrading Plugins-->
+<!--FILENAME: plugins-upgrade-->
+<!--PARENT: Plugins-->
+<!--ORDER: 10-->
+
 <p>Upgrading and Downgrading a plugin in Kaholo is done by installing a different version of a plugin than the one already installed. Kaholo does not accommodate running multiple versions of the same plugin. Normally an upgrade has no harmful effect but in some cases it could break some or all pipelines using that plugin. It is highly recommended to upgrade in test before risking mission-critical pipelines.</p>
 <p>As a general rule of thumb, the potential for breakage can be determined by the version number. Kaholo uses the <a href="https://semver.org/" style="color:#000088">Semantic Versioning</a> system, where version numbers are X.Y.Z such that X is the major version, Y is the minor version, and Z is the patch version. A major version number change is <b>likely</b> to break pipelines. A minor one is in theory backward compatible but some small breakage could occur in some pipelines. A patch version is unlikely to break anything because it contains only bug fixes.</p>
 <p>When a plugin upgrade has broken a pipeline action, it is most likely that downgrading to the original version will also immediately fix the action. However this is not guaranteed.</p>
