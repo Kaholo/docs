@@ -1,0 +1,69 @@
+<!--TITLE: Kaholo Vault-->
+<!--FILENAME: vault.html-->
+<!--PARENT: none-->
+<!--ORDER: 8-->
+<p>Pipelines often make use of passwords, keys, tokens, and other credentials that for security reasons should remain secret. To prevent exposing such secrets in the Kaholo UI, logs, error messages and such, they are stored in the Kaholo Vault. The Kaholo Vault stores the secrets as key-value pairs in encrypted format, and allows users to reference them by user-defined names without revealing the underlying secret.</p>
+<p>Take for example the parameter "Password" in the Docker Plugin method "Push Image". The underlying password is hidden, and only the vault item name, "password kaholo@nexus-a", is visible in Kaholo. Furthermore, the parameter is a searchable drop down of vault items to choose from.</p>
+<p><img class="alignnone wp-image-7488" src="https://kaholo.io/wp-content/uploads/2023/11/VaultDockerPushPassword620a.png" alt="" width="442"/></p>
+
+<h2>Adding Secrets to the Vault</h2>
+To add a secret to the Kaholo Vault, users require "Manage Policy" privileges, which includes a basket of Administrative privileges not including those to manage IAM policy itself. If in the left panel of the Kaholo UI there is no "Settings" under "Executions" and "Pipelines", contact your Kaholo Administrator to add your secret or grant you access to "Manage Policy".
+<h3>In-parameter Add New Vault Item option</h3>
+A convenient way to quickly add a Vault Item is using the option found in all parameters of type Vault, "Add New Vault Item". Click there and a dialog will prompt for Vault Item Name, Description, and Value.<div class=""></div>
+<p><img class="alignnone wp-image-7490" src="https://kaholo.io/wp-content/uploads/2023/11/VaultAddNewVaultItem620b.png" alt="" width="520"/></p>
+
+<h3>Vault Add Item Button</h3>
+<p>Another way to manage Vault Items is in Kaholo Settings | Vault (lock-shaped icon). Use the "Add Item" button at top right to create new vault items or the icons in the Actions column to delete or update them.</p>
+<p><img class="alignnone wp-image-7498" src="https://kaholo.io/wp-content/uploads/2023/11/VaultAddItemButton620c.png" alt="" width="1213"/></p>
+
+<h2>Using Vault items in code layer</h2>
+<p><b>Please read the documentation about the Kaholo code layer first.</b></p>
+<p>There are some use cases where using the Kaholo Vault has uses other than for parameters of type vault, including:</p>
+<ul>
+    <li>To obfuscate a parameter that is not normally a secret, e.g. username</li>
+    <li>To incorporate a vault item into a custom command</li>
+    <li>To encode or decode the vault item, e.g. base64 tokens</li>
+    <li>To include the vault item as part of a larger compilation</li>
+</ul>
+<p>To provide maximum flexibility, secrets from the vault are made accessible in the Kaholo code layer using asynchronous function <code style="font-size: 80%">kaholo.vault.getValueByKey()</code>.</p>
+
+<h3>Make any parameter secret</h3>
+<p>To make any parameter secret (any that is not already type Vault), first create a vault item to hold the secret value. For example, using the Text Editor plugin to write a message to a file with a secret path (file name and location). The vault item is named "Secret File Path" and the value is "secrets/enigma.txt".</p>
+<p>If putting this to practice, use the File System plugin first to ensure directory "secrets" exists.</p>
+<p>Next in the parameter, toggle the code switch and enter the following code:</p>
+<pre style="font-size: 80%; font-weight: bold; background-color: #eeeeee;">
+    kaholo.vault.getValueByKey("Secret File Path")
+</pre>
+<p>Now the location of the file on the Kaholo agent is a vaulted secret.</p>
+<p><img class="alignnone wp-image-7494" src="https://kaholo.io/wp-content/uploads/2023/11/VaultCodedParam620c.png" alt="" width="497"/></p>
+
+<h3>Use secrets in code layer</h3>
+<p>As an example of a more complex code layer task, consider the case where the content of the secret file is a JSON document containing both the file's secret path and a congratulatory message. The secret must be retrieved, included in a larger object and then made into a string to be written to disk.</p>
+<p>To use secrets in code the asynchronous nature of getValueByKey() must persist all the way to the action parameter level. The <code style="font-size: 80%">await</code> cannot be used outside of a synchronous function and without the await, the expected value is <code style="font-size: 80%">"[object Promise]"</code>.</p>
+<p>The example use case could be coded more concisely and directly into parameter "File Content", but for understandability, consider adding a JavaScript action to the pipeline and use the following code:
+<pre style="font-size: 80%; font-weight: bold; background-color: #eeeeee;">
+    async function getSecret(vaultItemName) {
+        return await kaholo.vault.getValueByKey(vaultItemName)
+    }
+    
+    async function jsonString(){
+        const jsonObj = {
+            "filePath": await getSecret("Secret File Path"),
+            "message": "Congratulations, you have found the secret file"
+        }
+        return JSON.stringify(jsonObj)
+    }
+</pre>
+Note that jsonString() is an ansyc function that awaits another async function that awaits <code style="font-size: 80%">kaholo.vault.getValueByKey()</code>. This is the continuity of asychronicity that produces reliable results in JavaScript.</p>
+<p>Next the parameter "File Content" is toggled to code and the only code required there is <code style="font-size: 80%">jsonString()</code>. Enable parameter "Return File Content" to see the resulting file in Final Results of the Execution view in Kaholo.</p>
+<p><img class="alignnone wp-image-7496" src="https://kaholo.io/wp-content/uploads/2023/11/VaultCodingWithVaultItems620a.png" alt="" width="910"/></p>
+<h2>Redacted Secrets</h2>
+<p>Some Kaholo Plugins, specifically those using the Kaholo Plugin Library, automatically catch and redact secrets from the output of actions - both Activity Log and Final Result. When this happens you may see the word "REDACTED" in the output. This is a very unusual occurance and when it does happen it is usually the result of an unrelated and unexpected error. The feature is there to protect against accidental leakage of secrets into logs.</p>
+<p>It behaves as follows:
+<ul>
+    <li>Works only for vault items used in vaulted parameters</li>
+    <li>Works only for vault items with some minimal amount of entropy</li>
+    <li>Works on the scope of single actions</li>
+    <li>Replaces any text in Activity Log or Final Result that is an exact match for the vault item with "REDACTED"</li>
+</ul></p>
+<p>An easy way to see the feature in action is the Kaholo Template Plugin, method "Hello". It has a vaulted parameter and another parameter that will cause it to expose the secret in the Final Result. If the vaulted item is low entropy, e.g. "abc", it succeeds - "Here is the secret: abc". If the vaulted item has greater entropy, e.g. "asd634rgd", the final result is "Here is the secret: REDACTED!".</p>

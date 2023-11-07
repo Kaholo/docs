@@ -17,5 +17,12 @@
 <!--IMAGE: -->
 <p><img class="alignnone wp-image-7474" src="https://kaholo.io/wp-content/uploads/2023/11/PluginsAccountDetail620a.png" alt="" width="1409"/></p>
 
-<!--CODE: -->
+<!--CODE INLINE: -->
 <code style="font-size: 80%">config.json</code>
+
+<!--CODE BLOCK: -->
+<pre style="font-size: 80%; font-weight: bold">
+    async function getSecret(vaultItemName) {
+        return await kaholo.vault.getValueByKey(vaultItemName)
+    }
+</pre>
