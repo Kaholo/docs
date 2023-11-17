@@ -1,8 +1,4 @@
-<!--TITLE: Kaholo Vault-->
-<!--FILENAME: vault.html-->
-<!--PARENT: none-->
-<!--ORDER: 8-->
-<p>Pipelines often make use of passwords, keys, tokens, and other credentials that for security reasons should remain secret. To prevent exposing such secrets in the Kaholo UI, logs, error messages and such, they are stored in the Kaholo Vault. The Kaholo Vault stores the secrets as key-value pairs in encrypted format, and allows users to reference them by user-defined names without revealing the underlying secret.</p>
+<!--TITLE: Kaholo Vault--><!--FILENAME: vault.html--><!--PARENT: none--><!--ORDER: 8--><p>Pipelines often make use of passwords, keys, tokens, and other credentials that for security reasons should remain secret. To prevent exposing such secrets in the Kaholo UI, logs, error messages and such, they are stored in the Kaholo Vault. The Kaholo Vault stores the secrets as key-value pairs in encrypted format, and allows users to reference them by user-defined names without revealing the underlying secret.</p>
 <p>Take for example the parameter "Password" in the Docker Plugin method "Push Image". The underlying password is hidden, and only the vault item name, "password kaholo@nexus-a", is visible in Kaholo. Furthermore, the parameter is a searchable drop down of vault items to choose from.</p>
 <p><img class="alignnone wp-image-7488" src="https://kaholo.io/wp-content/uploads/2023/11/VaultDockerPushPassword620a.png" alt="" width="442"/></p>
 
