@@ -1,0 +1,32 @@
+<!--TITLE: Navigation Panel--><!--FILENAME: navigation-panel.html--><!--PARENT: none--><!--ORDER: 10--><p>Getting around Kaholo is highly intuitive, but it may help to know more detail about commonly-used features, tips, and tricks while creating, executing, and monitoring pipelines. This section lays out the basics for a typical daily workflow.</p>
+<h2>Navigation Panel</h2>
+<p>In any view of Kaholo the vertical navigation panel is always present on the far left, although what is displayed depends on the access rights of the user who is logged in. For a user with full administrative rights, there will be Executions, Pipelines, Calendar, Settings, and beneath those are indicators of who is logged in, a link to this documentation, and the version of Kaholo in use.</p>
+<p><img class="alignnone wp-image-7511" src="https://kaholo.io/wp-content/uploads/2023/11/navigation-designview-v620.png" alt="" width="1326"/></p>
+<h3>Executions</h3>
+<p>Executions displays a list of recently run pipeline executions, including a badge to indicate the execution status, project and pipeline name, start time, duration, how/why they were run and by whom, and on the far right a button to quickly re-run the pipeline with the exact same configuration. There are search options at the top to select executions of specific pipelines, triggers, projects, and a toggle to display only pipelines in error.</p>
+<p>This display is most useful for daily monitoring of automation, i.e. to ensure everything is operating smoothly and quickly identify any problematic pipelines.</p>
+<p style="margin-left: 25px;"><b>TIP: </b>Clicking on the status badge will navigate directly to the execution the badge represents.</p>
+<h3>Pipelines</h3>
+<p>Pipelines displays a list of pipelines, organized by project, with a status badge of the most recent execution of each pipeline. There are also options to create and archive pipelines. Clicking on a pipeline opens the pipeline in design view.</p>
+<h4>Pipeline Creation</h4>
+<p>Pipelines can be created here three ways:</p>
+<ul>
+    <li>Create Blank Pipeline - from scratch</li>
+    <li>Pipeline Template - from another pipeline that was saved as a template, and</li>
+    <li>Import Pipeline - from a YAML file, such as that created by exporting a pipeline</li>
+</ul>
+<h4>Archived Pipelines</h4>
+<p>Archived pipelines are those that are no longer in use, set aside and invisible in standard views in Kaholo, but not yet deleted.</p>
+<h3>Calendar</h3>
+<p>The calendar is where pipelines may be scheduled for execution on a clock schedule, and where scheduled executions can be viewed.</p>
+<h3>Settings</h3>
+<p>Settings by default shows all installed plugins, but it also displays a secondary vertical panel of icons next to the left navigation panel. What is visible here depends on the level of access of the user logged in, but it may include:</p>
+<ul>
+    <li>Puzzle-peice icon - Plugins, the default view in Settings</li>
+    <li>Spy icon - Agents, the devices that carry out execution of pipelines</li>
+    <li>Lock icon - Kaholo Vault, where secrets are kept</li>
+    <li>Key icon - IAM, configuration of Kaholo users, groups, and security</li>
+    <li>Bell icon - Notifications, a webhook URL for pipeline failure messages</li>
+    <li>Certificate Icon - License, the place to update or view the Kaholo License file</li>
+</ul>
+<p>Mousing over each icon displays its meaning in a text hint. For greater detail on the use of each of these settings see their specific section in the documentation.</p>

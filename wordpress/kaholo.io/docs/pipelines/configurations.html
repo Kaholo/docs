@@ -1,0 +1,27 @@
+<!--TITLE: Configurations--><!--FILENAME: configurations.html--><!--PARENT: Pipelines--><!--ORDER: 4--><p>Configurations are JSON documents that make values easily available to the Kaholo code layer. The configurations view is selected by clicking on "Configurations" in the Pipeline navigation bar across the top of the display.</p>
+<h2>When To Use Configurations</h2>
+<p>Configurations are convenient anytime the same pipeline can be repurposed for more than one specific use case. In an example use case where a product is being deployed to kubernetes, configuration could be used to specify:</p>
+<ul>
+    <li>Which product to deploy</li>
+    <li>Which branch to deploy</li>
+    <li>Which Kubernetes cluster to use</li>
+    <li>How to configure the Ingress</li>
+    <li>Who to notify when deployment is complete</li>
+    <li>Whether or not to run automated testing</li>
+</ul>
+<p>This is only an example, the real world possibilities for configurations are endless. Once configurations exist, when a pipeline is run manually, the user must select which configuration to use for the execution.</p>
+<p><img class="alignnone wp-image-7525" src="https://kaholo.io/wp-content/uploads/2023/11/PipelineConfiguration620b.gif" alt="" width="1326"/></p>
+<h2>Accessing in Code</h2>
+<p>Nearly any parameter in Kaholo can be replaced by code by toggling the code switch in the action side panel. In this example the Kubernetes action uses a Kaholo plugin account to determine which Kubernetes cluster to use and get the service account credentials for that cluster. The account is normally selected using the drop-down for parameter "Account".</p>
+<p>To use the account specified at "kubernetesAccount" in the configuration, first toggle the code switch for parameter "Account" from "Text" to "Code". Then enter the code and save the pipeline:</p>
+<pre style="font-size: 80%; font-weight: bold">
+    kaholo.execution.configuration.kubernetesAccount
+</pre>
+<p>It is important that for whatever is configured for <code style="font-size: 80%">kubernetesAccount</code> in the configuration, in this example "kube-ca", a Kubernetes plugin account of the same name must exist and have valid endpoint, CA certificate, and service account token in order to work.</p>
+<p>Once coded to use configuration in this way, the same pipeline can deploy to as many Kubernetes clusters as there are configurations.</p>
+<p><img class="alignnone wp-image-7522" src="https://kaholo.io/wp-content/uploads/2023/11/PipelineConfigurationCode620a.gif" alt="" width="1210"/></p>
+<h2>Configuration in Automation</h2>
+<p>In the above example a human must interact with Kaholo to select a configuration. In automation, for example the Kaholo Pipeline Executor plugin, the Calendar scheduler, or the configuration of Kaholo webhook triggers the configuration with which to run is included as a parameter.</p>
+<p>In the case of the Pipeline Executor plugin, the configuration of the executed pipeline may even be selected from the configuration of the pipeline doing the executing. This allows for sophisticated chaining of pipelines.</p>
+<p>In the case of a trigger, it may be necessary to configure one trigger for each configuration, use a conditional node, and based on the payload of the trigger choose whether or not to continue with the execution with the provided configuration. See the documentation on conditional nodes and triggers for further detail.</p>
+<p>In the case of scheduled execution each configuration can be scheduled independently and simultaneously if necessary.</p>
